@@ -13,6 +13,8 @@ Testes que falham:
 | --- | --- | --- | --- | --- | --- | --- |
 | # | RN02 | app.js - Validar Telefone |  return digitos.length >= 10 && digitos.length <= 11; |  return digitos.length > 10 && digitos.length <= 11; | `fix: Reservas somem depois de recarregar a página closes #4` | |
 | # | RN03 | app.js - ValidarHorario | if (duracao < 1 or duracao > 4) return false; | if (duracao < 1 or duracao >= 4) return false; | `fix: Reserva de 4 horas é aceita #3` | |
+| # | RN05 | app.js - valorReserva | total += hora > 18 ? base * 1.25 : base; | total += hora >= 18 ? base * 1.25 : base; | `fix: Horário nobre não é cobrado na hora das 18:00 #2` | |
+
 
 
 ## Depois de corrigir
