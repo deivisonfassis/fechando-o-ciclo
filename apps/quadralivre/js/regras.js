@@ -13,13 +13,13 @@ function validarNome(nome) {
 // RN02 — Telefone
 function validarTelefone(telefone) {
   const digitos = String(telefone || '').replace(/\D/g, '');
-  return digitos.length >= 10 && digitos.length <= 11;
+  return digitos.length > 10 && digitos.length <= 11;
 }
 
 // RN03 — Horário de funcionamento e duração
 function validarHorario(inicio, duracao) {
   if (!Number.isInteger(inicio) || !Number.isInteger(duracao)) return false;
-  if (duracao < 1 || duracao > 4) return false;
+  if (duracao < 1 || duracao >= 4) return false;
   return inicio >= 8 && inicio + duracao <= 22;
 }
 
@@ -28,7 +28,7 @@ function valorReserva(quadra, inicio, duracao, socio) {
   const base = PRECO_HORA[quadra];
   let total = 0;
   for (let hora = inicio; hora < inicio + duracao; hora++) {
-    total += hora > 18 ? base * 1.25 : base;
+    total += hora >= 18 ? base * 1.25 : base;
   }
   if (socio) total = total * 0.9;
   return Math.round(total * 100) / 100;
@@ -39,7 +39,8 @@ function temConflito(reservas, nova) {
   return reservas.some(r =>
     r.quadra === nova.quadra &&
     r.data === nova.data &&
-    r.inicio === nova.inicio
+    nova.inicio < r.inicio + r.duracao &&
+    nova.inicio + nova.duracao > r.inicio
   );
 }
 
