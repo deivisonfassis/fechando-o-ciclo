@@ -12,6 +12,7 @@ Testes que falham:
 | Issue | Regra | Função e arquivo | Causa (linha errada) | Correção (linha nova) | Commit | Teste que prova |
 | --- | --- | --- | --- | --- | --- | --- |
 | # | RN02 | app.js - Validar Telefone |  return digitos.length >= 10 && digitos.length <= 11; |  return digitos.length > 10 && digitos.length <= 11; | `fix: Reservas somem depois de recarregar a página closes #4` | |
+| # | RN03 | app.js - ValidarHorario | if (duracao < 1 or duracao > 4) return false; | if (duracao < 1 or duracao >= 4) return false; | `fix: Reserva de 4 horas é aceita #3` | |
 
 
 ## Depois de corrigir
